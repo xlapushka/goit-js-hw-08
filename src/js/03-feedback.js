@@ -10,7 +10,7 @@ let input = feedbackform.querySelector('.feedback-form input');
 let textarea = feedbackform.querySelector('.feedback-form textarea');
 // let submitButton = document.querySelector('.submit');
 
-feedbackform.addEventListener('input', addToLocalStorage);
+feedbackform.addEventListener('input', throttle(addToLocalStorage, 500));
 function addToLocalStorage(event) {
   event.preventDefault();
   if (event.target.name === 'email') {
@@ -23,7 +23,7 @@ function addToLocalStorage(event) {
   }
 }
 
-window.addEventListener('onload', restoreTexts());
+window.addEventListener('load', restoreTexts());
 function restoreTexts() {
   if (!localStorage.getItem('feedback-form-state-email')) {
     input.value = '';
@@ -38,19 +38,16 @@ function restoreTexts() {
   }
 }
 
-feedbackform.addEventListener('submit', confirmForm());
-function confirmForm() {
-  // event.preventDefault();
-  if (event.target.name === 'submit') { console.log('hgh') };
-  // if (event.target.name === 'submit') {
-  //   console.log('gh')
-  // console.log('email: ', input.value);
-  // console.log('message: ', textarea.value);
-  // obj.email = '';
-  // obj.message = '';
-  // input.value = '';
-  // textarea.value = '';
-  // localStorage.removeItem('feedback-form-state-email');
-  // localStorage.removeItem('feedback-form-state-message');
-  // }
+feedbackform.addEventListener('submit', confirmForm);
+function confirmForm(event) {
+  event.preventDefault();
+  console.log('email: ', input.value);
+  console.log('message: ', textarea.value);
+  obj.email = '';
+  obj.message = '';
+  input.value = '';
+  textarea.value = '';
+  localStorage.removeItem('feedback-form-state-email');
+  localStorage.removeItem('feedback-form-state-message');
 }
+

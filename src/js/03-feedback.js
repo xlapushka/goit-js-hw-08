@@ -6,8 +6,8 @@ const obj = {
 };
 
 const feedbackform = document.querySelector('.feedback-form');
-let input = feedbackform.querySelector('input');
-let textarea = feedbackform.querySelector('textarea');
+let input = feedbackform.querySelector('.feedback-form input');
+let textarea = feedbackform.querySelector('.feedback-form textarea');
 // let submitButton = document.querySelector('.submit');
 
 feedbackform.addEventListener('input', addToLocalStorage);
@@ -21,7 +21,7 @@ function addToLocalStorage(event) {
     obj.message = textarea.value;
     localStorage.setItem('feedback-form-state-message', obj.message);
   }
-};
+}
 
 window.addEventListener('onload', restoreTexts());
 function restoreTexts() {
@@ -36,21 +36,21 @@ function restoreTexts() {
   } else {
     textarea.value = localStorage.getItem('feedback-form-state-message');
   }
-};
+}
 
-feedbackform.submit(confirmForm());
-function confirmForm(event) {
-  event.preventDefault();
-  console.log('hgh');
+feedbackform.addEventListener('submit', confirmForm());
+function confirmForm() {
+  // event.preventDefault();
+  if (event.target.name === 'submit') { console.log('hgh') };
   // if (event.target.name === 'submit') {
   //   console.log('gh')
-    // console.log('email: ', input.value);
-    // console.log('message: ', textarea.value);
-    // obj.email = '';
-    // obj.message = '';
-    // input.value = '';
-    // textarea.value = '';
-    // localStorage.removeItem('feedback-form-state-email');
-    // localStorage.removeItem('feedback-form-state-message');
+  // console.log('email: ', input.value);
+  // console.log('message: ', textarea.value);
+  // obj.email = '';
+  // obj.message = '';
+  // input.value = '';
+  // textarea.value = '';
+  // localStorage.removeItem('feedback-form-state-email');
+  // localStorage.removeItem('feedback-form-state-message');
   // }
 }

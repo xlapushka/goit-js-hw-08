@@ -10,29 +10,39 @@ const timeUpdated = function (data) {
 player.on('timeupdate', throttle(timeUpdated, 1000));
 
 window.addEventListener('onload', restoreTimecode());
-function restoreTimecode() {
-  try {
-    // console.log(localStorage.getItem('videoplayer-current-time'));
-    player
-      .setCurrentTime(localStorage.getItem('videoplayer-current-time'))
-      .then(function (seconds) {
-        seconds = localStorage.getItem('videoplayer-current-time');
-      })
-      .catch(function (error) {
-        switch (error.name) {
-          case 'RangeError':
-            // the time was less than 0 or greater than the video’s duration
-            break;
-
-          default:
-            // some other error occurred
-            break;
-        }
-      });
-  } catch (e) {
-    console.log(e.message);
-  }
+function restoreTimecode() { 
+  player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
 }
+
+
+
+
+
+
+
+// {
+//   try {
+//     // console.log(localStorage.getItem('videoplayer-current-time'));
+//     player
+//       .setCurrentTime(localStorage.getItem('videoplayer-current-time'))
+//       .then(function (seconds) {
+//         seconds = localStorage.getItem('videoplayer-current-time');
+//       })
+//       .catch(function (error) {
+//         switch (error.name) {
+//           case 'RangeError':
+//             // the time was less than 0 or greater than the video’s duration
+//             break;
+
+//           default:
+//             // some other error occurred
+//             break;
+//         }
+//       });
+//   } catch (e) {
+//     console.log(e.message);
+//   }
+// }
 
 // // Avoid excessively updating the position while scrolling.
 // jQuery(window).on('scroll', _.throttle(updatePosition, 100));

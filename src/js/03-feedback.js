@@ -41,13 +41,17 @@ function restoreTexts() {
 feedbackform.addEventListener('submit', confirmForm);
 function confirmForm(event) {
   event.preventDefault();
-  console.log('email: ', input.value);
-  console.log('message: ', textarea.value);
-  obj.email = '';
-  obj.message = '';
-  input.value = '';
-  textarea.value = '';
-  localStorage.removeItem('feedback-form-state-email');
-  localStorage.removeItem('feedback-form-state-message');
+  if (obj.email === '' || (obj.message = '')) {
+    alert("Please enter all info")
+  } else {
+    console.log('email: ', input.value);
+    console.log('message: ', textarea.value);
+    obj.email = '';
+    obj.message = '';
+    input.value = '';
+    textarea.value = '';
+    localStorage.removeItem('feedback-form-state-email');
+    localStorage.removeItem('feedback-form-state-message');
+  }
 }
 

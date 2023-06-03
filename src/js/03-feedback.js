@@ -8,41 +8,47 @@ const obj = {
 const feedbackform = document.querySelector('.feedback-form');
 let input = feedbackform.querySelector('.feedback-form input');
 let textarea = feedbackform.querySelector('.feedback-form textarea');
-// let submitButton = document.querySelector('.submit');
+
 
 feedbackform.addEventListener('input', throttle(addToLocalStorage, 500));
+
 function addToLocalStorage(event) {
   event.preventDefault();
   if (event.target.name === 'email') {
     obj.email = input.value;
-    localStorage.setItem('feedback-form-state-email', obj.email);
   }
   if (event.target.name === 'message') {
     obj.message = textarea.value;
-    localStorage.setItem('feedback-form-state-message', obj.message);
   }
+  
+  const objJSON = JSON.stringify(obj);
+  localStorage.setItem('feedback-form-state', objJSON);
 }
 
 window.addEventListener('load', restoreTexts());
 function restoreTexts() {
-  if (!localStorage.getItem('feedback-form-state-email')) {
-    input.value = '';
-  } else {
-    input.value = localStorage.getItem('feedback-form-state-email');
-  }
+  const temp = JSON.parse(localStorage.getItem('feedback-form-state'));
+  console.log(temp);
 
-  if (!localStorage.getItem('feedback-form-state-message')) {
-    textarea.value = '';
+  if (!temp.email) {
+    input.value = input.value;
   } else {
-    textarea.value = localStorage.getItem('feedback-form-state-message');
+    input.value = temp.email;
+  };
+
+  if (!temp.message) {
+    textarea.value = textarea.value;
+  } else {
+    textarea.value = temp.message;
   }
 }
 
 feedbackform.addEventListener('submit', confirmForm);
+
 function confirmForm(event) {
   event.preventDefault();
   if (obj.email === '' || (obj.message = '')) {
-    alert("Please enter all info")
+    alert('Please enter all info');
   } else {
     console.log('email: ', input.value);
     console.log('message: ', textarea.value);
@@ -50,8 +56,6 @@ function confirmForm(event) {
     obj.message = '';
     input.value = '';
     textarea.value = '';
-    localStorage.removeItem('feedback-form-state-email');
-    localStorage.removeItem('feedback-form-state-message');
+    localStorage.removeItem('feedback-form-state');
   }
 }
-

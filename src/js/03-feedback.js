@@ -29,22 +29,23 @@ function restoreTexts() {
   temp = JSON.parse(localStorage.getItem('feedback-form-state'));
 
   if (temp === null) {
-    input.value = "";
-    textarea.message = "";
+    input.value = '';
+    textarea.message = '';
   } else {
     input.value = temp.email;
-    textarea.value = temp.message}
+    textarea.value = temp.message;
+  }
 }
 
 feedbackform.addEventListener('submit', confirmForm);
 
 function confirmForm(event) {
   event.preventDefault();
-  if (obj.email === '' || (obj.message = '')) {
+  if (obj.email === '' || obj.message === '') {
     alert('Please enter all info');
   } else {
     console.log('email: ', input.value);
-    console.log('message: ', textarea.message);
+    console.log('message: ', textarea.value);
     obj.email = '';
     obj.message = '';
     input.value = '';

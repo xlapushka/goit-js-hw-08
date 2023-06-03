@@ -11,17 +11,13 @@ const timeUpdated = function (data) {
 player.on('timeupdate', throttle(timeUpdated, 1000));
 
 window.addEventListener('onload', restoreTimecode());
-function restoreTimecode() { 
+function restoreTimecode() {
   if (temp === null) {
-    player.setCurrentTime(0)
-  } else { 
+    player.setCurrentTime(0);
+  } else {
     player.setCurrentTime(localStorage.getItem('videoplayer-current-time'));
   }
 }
-
-
-
-
 
 // {
 //   try {
